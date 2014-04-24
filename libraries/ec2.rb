@@ -60,14 +60,16 @@ module Opscode
           Chef::Log.error("Missing gem 'right_aws'. Use the default aws recipe to install it first.")
         end
 
+        endpoint_url = new_resource.endpoint_url
+
         region = instance_availability_zone
         region = region[0, region.length-1]
 
         if new_resource.aws_access_key and new_resource.aws_secret_access_key
-          aws_interface.new(new_resource.aws_access_key, new_resource.aws_secret_access_key, {:logger => Chef::Log, :region => region})
+          aws_interface.new(new_resource.aws_access_key, new_resource.aws_secret_access_key, {:logger => Chef::Log, :region => region, :endpoint_url => endpoint_url})
         else
           creds = query_role_credentials
-          aws_interface.new(creds['AccessKeyId'], creds['SecretAccessKey'], {:logger => Chef::Log, :region => region, :token => creds['Token']})
+          aws_interface.new(creds['AccessKeyId'], creds['SecretAccessKey'], {:logger => Chef::Log, :region => region, :token => creds['Token'], :endpoint_url => endpoint_url})
         end
       end
 

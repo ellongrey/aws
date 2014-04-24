@@ -26,6 +26,7 @@ attribute :timeout,               :default => 3*60 # 3 mins, nil or 0 for no tim
 attribute :snapshots_to_keep,     :default => 2
 attribute :volume_type,           :kind_of => String, :default => 'standard'
 attribute :piops,                 :kind_of => Integer, :default => 0
+attribute :endpoint_url,          :kind_of => String
 
 def initialize(*args)
   super

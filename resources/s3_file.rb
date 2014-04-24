@@ -20,6 +20,8 @@ attribute :group, :regex => Chef::Config[:group_valid_regex]
 attribute :mode, :kind_of => [String, NilClass], :default => nil
 attribute :checksum, :kind_of => [String, NilClass], :default => nil
 attribute :backup, :kind_of => [Integer, FalseClass], :default => 5
+attribute :endpoint_url,          :kind_of => String
+
 if node['platform_family'] == "windows"
   attribute :inherits, :kind_of => [TrueClass, FalseClass], :default => true
   attribute :rights, :kind_of => Hash, :default => nil
